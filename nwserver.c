@@ -1,12 +1,12 @@
-#include<sys/types.h>
-#include<sys/socket.h>
-#include<stdio.h>
-#include<netinet/in.h>
-#include<arpa/inet.h>
-#include<unistd.h>
-#include<stdlib.h>
-#include<string.h>
-#include<pthread.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <stdio.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <pthread.h>
 
 int count=0;
 char text[100];
@@ -37,7 +37,7 @@ void *server(void *arg)
 			return;
 		}
 		printf("Enter message : ");
-		gets(text);
+		fgets(text,100,stdin);
 		write(*sockfd, text, 100);
 		printf(".................\n");
 	}

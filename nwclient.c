@@ -1,11 +1,11 @@
-#include<sys/types.h>
-#include<sys/socket.h>
-#include<stdio.h>
-#include<netinet/in.h>
-#include<arpa/inet.h>
-#include<unistd.h>
-#include<stdlib.h>
-#include<string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <stdio.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 int main()
 {
 	int sockfd;
@@ -27,7 +27,7 @@ int main()
 			exit(1);
 		}
 		printf("enter your message : ");
-		gets(text);
+		fgets(text,100,stdin);
 		write(sockfd,text,100);
 		printf("...............\n");
 		read(sockfd,text,100);
