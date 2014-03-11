@@ -11,14 +11,14 @@
 int count=0;
 char text[100];
 int res,i=0;
-pthread_t a_thread[10];
+pthread_t a_thread;
 void *thread_result;
 int server_sockfd, client_sockfd;
 int server_len, client_len,flag=0;
 struct sockaddr_in server_address;
 struct sockaddr_in client_address;
 
-void *server(void *arg)
+/*void *server(void *arg)
 {
 	int *sockfd=(int *)arg;
 	count++;
@@ -33,7 +33,7 @@ void *server(void *arg)
 		{	
 			count--;
 			write(*sockfd, "Good Bye !", 100);
-			pthread_exit((void *)&sockfd);
+			pthread_exit("Bye");
 			return;
 		}
 		printf("Enter message : ");
@@ -41,7 +41,7 @@ void *server(void *arg)
 		write(*sockfd, text, 100);
 		printf(".................\n");
 	}
-}
+}*/
 int main()
 {
 	
@@ -57,17 +57,8 @@ int main()
 		printf("server waiting...\n");
 		client_len = sizeof(client_address);
 		client_sockfd = accept(server_sockfd,(struct sockaddr *)&client_address, &client_len);
-		res = pthread_create(&a_thread[i], NULL, server, (void *)&client_sockfd);
-		if (res != 0) 
-		{
-			perror("Thread creation failed\n");
-			exit(EXIT_FAILURE);
-		}
-		res = pthread_join(a_thread[i], &thread_result);
-		if (res != 0) 
-		{
-			perror("Thread join failed\n");
-			exit(EXIT_FAILURE);
-		}
+		read(client_sockfd, text, 100);
+		puts(text);
+
 	}
 }

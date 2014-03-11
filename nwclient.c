@@ -30,12 +30,12 @@ int main()
 		fgets(text,100,stdin);
 		write(sockfd,text,100);
 		printf("...............\n");
-		read(sockfd,text,100);
-		printf("message from server : ");
-		puts(text);
+		/*///read(sockfd,text,100);
+		//printf("message from server : ");
+		//puts(text);
 		if(strcmp(text,"Good Bye !")==0)
 		{
 			exit(1);
-		}
+		}*/
 	}
 }
