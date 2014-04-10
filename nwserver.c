@@ -45,6 +45,8 @@ struct sockaddr_in client_address;
 int main()
 {
 	
+	fd_set main;
+	fd_set readfds;
 	server_sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	server_address.sin_family = AF_INET;
 	server_address.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -55,6 +57,11 @@ int main()
 	while(1)
 	{
 		printf("server waiting...\n");
+		readfds = main;
+		if(select(fdmax+1, &readfds, NULL, NULL, NULL) == -1){
+			perror("select");
+			exit(4);
+		}
 		client_len = sizeof(client_address);
 		client_sockfd = accept(server_sockfd,(struct sockaddr *)&client_address, &client_len);
 		read(client_sockfd, text, 100);
